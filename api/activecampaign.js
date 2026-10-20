@@ -157,10 +157,17 @@ async function saveAssessmentContact({
     await addTag(contactId, stageTagId);
   }
 
-  // Marketing list subscription will be handled separately.
-  // Do not subscribe anyone based solely on assessment completion.
-  // Preserve existing subscription preferences.
-  void marketingConsent;
+ // Record explicit marketing consent without changing
+// the contact's existing subscription status.
+if (marketingConsent === true) {
+  const optInTagId = await getTagId(
+    "Coffee Toolkit - Marketing Opt-In"
+  );
+
+  if (!assignedTagIds.has(String(optInTagId))) {
+    await addTag(contactId, optInTagId);
+  }
+}
 
   return contactId;
 }
