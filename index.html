@@ -479,6 +479,28 @@ $("detailsForm").onsubmit = async event => {
 
   $("formError").textContent = "";
   $("generate").disabled = true;
+  
+$("generate").textContent = "Preparing your action plan…";
+
+let waitingMessage = document.getElementById("waitingMessage");
+
+if (!waitingMessage) {
+  waitingMessage = document.createElement("p");
+  waitingMessage.id = "waitingMessage";
+  waitingMessage.style.cssText =
+    "margin-top:16px;text-align:center;" +
+    "color:#746D67;font-size:14px;line-height:1.6;";
+
+  $("generate").insertAdjacentElement("afterend", waitingMessage);
+}
+
+waitingMessage.textContent =
+  "☕ Building your personalized report. " +
+  "This usually takes around 15–30 seconds. " +
+  "Please keep this page open.";
+
+waitingMessage.hidden = false;
+
   $("generate").textContent = "Generating your plan...";
 
   try {
@@ -631,7 +653,8 @@ $("detailsForm").onsubmit = async event => {
     $("results").hidden = false;
 
     // Email and consent are not transmitted or saved.
-    // ActiveCampaign integration will be added later.
+ 
+  // ActiveCampaign integration will be added later.
 
   } catch (error) {
     $("formError").textContent = error.message;
@@ -639,8 +662,16 @@ $("detailsForm").onsubmit = async event => {
     $("generate").disabled = false;
     $("generate").textContent =
       "Generate My Action Plan →";
+
+    const waitingMessage =
+      document.getElementById("waitingMessage");
+
+    if (waitingMessage) {
+      waitingMessage.hidden = true;
+    }
   }
 };
+
 
 $("savePdf").onclick = () => {
   window.print();
