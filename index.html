@@ -2,152 +2,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coffee Shop Startup Readiness Assessment</title>
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: #f7f4ef;
-      color: #302720;
-      font-family: Arial, sans-serif;
-    }
-    main {
-      max-width: 720px;
-      margin: 45px auto;
-      padding: 20px;
-    }
-    .card {
-      background: white;
-      padding: 35px;
-      border-radius: 16px;
-      box-shadow: 0 8px 30px #0000000a;
-    }
-    .eyebrow {
-      color: #8d6748;
-      font-size: 12px;
-      font-weight: bold;
-      letter-spacing: 2px;
-    }
-    h1 { font-size: 32px; line-height: 1.2; }
-    h2 { font-size: 24px; }
-    p { line-height: 1.6; }
-    .muted { color: #776d65; }
-    .progress {
-      background: #eae5df;
-      height: 7px;
-      border-radius: 20px;
-      margin: 20px 0 30px;
-      overflow: hidden;
-    }
-    #bar {
-      height: 100%;
-      width: 0;
-      background: #8d6748;
-      transition: width .2s;
-    }
-    .option {
-      display: block;
-      width: 100%;
-      text-align: left;
-      padding: 16px;
-      margin: 10px 0;
-      background: white;
-      border: 1px solid #ddd4cb;
-      border-radius: 9px;
-      cursor: pointer;
-      font-size: 15px;
-      line-height: 1.5;
-    }
-    .option:hover, .selected {
-      border-color: #8d6748;
-      background: #f5eee6;
-    }
-    button {
-      padding: 14px 24px;
-      border: 0;
-      border-radius: 8px;
-      background: #34271e;
-      color: white;
-      cursor: pointer;
-      font-size: 15px;
-    }
-    button:disabled { opacity: .4; cursor: not-allowed; }
-    .secondary {
-      background: #eee8e2;
-      color: #302720;
-    }
-    .buttons {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 25px;
-      gap: 12px;
-    }
-    .score {
-      font-size: 64px;
-      font-weight: bold;
-      margin: 15px 0;
-    }
-    .gap {
-      padding: 14px;
-      margin: 10px 0;
-      background: #f7f4ef;
-      border-radius: 8px;
-    }
-    [hidden] { display: none !important; }
-    @media(max-width:600px) {
-      main { margin: 10px auto; }
-      .card { padding: 24px; }
-      h1 { font-size: 27px; }
-    }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Coffee Shop Startup Readiness | Coffee Business</title>
+<style>
+:root {
+  --cream: #faf7f4;
+  --dark: #252120;
+  --gold: #f8b144;
+  --grey: #746d67;
+  --line: #ddd6d0;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--dark);
+  font-family: Arial, Helvetica, sans-serif;
+}
+main {
+  max-width: 780px;
+  margin: 45px auto;
+  padding: 20px;
+}
+.eyebrow {
+  font-size: 12px;
+  letter-spacing: 1.6px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.eyebrow:before {
+  content: "";
+  display: inline-block;
+  width: 30px;
+  height: 2px;
+  background: var(--gold);
+  vertical-align: middle;
+  margin-right: 12px;
+}
+h1, h2 {
+  font-family: Georgia, serif;
+  font-weight: normal;
+  line-height: 1.15;
+}
+h1 { font-size: clamp(36px, 6vw, 58px); }
+h2 { font-size: 30px; }
+em { color: var(--gold); }
+p { line-height: 1.65; }
+.muted { color: var(--grey); }
+.card {
+  background: white;
+  padding: 38px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  margin-top: 28px;
+}
+.progress {
+  height: 7px;
+  background: #eee8e2;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 20px 0 32px;
+}
+#bar {
+  height: 100%;
+  width: 0;
+  background: var(--gold);
+  transition: width .25s;
+}
+.option {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 17px;
+  margin: 10px 0;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  color: var(--dark);
+  font-size: 15px;
+  cursor: pointer;
+}
+.option:hover, .option.selected {
+  border-color: var(--gold);
+  background: #fff6e7;
+}
+button.primary {
+  background: var(--gold);
+  color: var(--dark);
+  border: none;
+  padding: 16px 23px;
+  border-radius: 7px;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+}
+button.secondary {
+  background: transparent;
+  color: var(--dark);
+  border: 1px solid var(--line);
+  padding: 15px 22px;
+  border-radius: 7px;
+  cursor: pointer;
+}
+button:disabled { opacity: .45; cursor: not-allowed; }
+.actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 25px;
+}
+label {
+  display: block;
+  margin-top: 20px;
+  font-weight: bold;
+}
+input[type=text], input[type=email] {
+  width: 100%;
+  padding: 15px;
+  margin-top: 8px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  font-size: 16px;
+}
+.consent {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.consent input { margin-top: 4px; }
+.score {
+  font-size: 64px;
+  font-weight: bold;
+  margin: 10px 0;
+}
+.priority {
+  padding: 16px;
+  background: var(--cream);
+  margin: 12px 0;
+  border-radius: 8px;
+}
+.report {
+  white-space: pre-wrap;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+}
+.notice {
+  font-size: 13px;
+  color: var(--grey);
+}
+.error { color: #a12b23; }
+[hidden] { display: none !important; }
+@media(max-width:600px) {
+  main { margin: 12px auto; }
+  .card { padding: 23px; }
+  .actions { flex-wrap: wrap; }
+}
+</style>
 </head>
 <body>
 <main>
-  <div class="card">
-    <p class="eyebrow">COFFEE BUSINESS TOOLKIT</p>
-    <h1>Are You Ready to Open Your Coffee Shop?</h1>
+  <p class="eyebrow">Coffee Business Startup Toolkit</p>
+  <h1>Build your coffee shop on a
+    <em>stronger foundation.</em></h1>
+  <p class="muted">
+    Answer 10 questions to discover how developed
+    your startup plans are and what to focus on next.
+  </p>
+
+  <section class="card" id="assessment">
+    <p id="counter" class="muted"></p>
+    <div class="progress"><div id="bar"></div></div>
+    <h2 id="question"></h2>
+    <div id="options"></div>
+    <div class="actions">
+      <button class="secondary" id="back">Back</button>
+      <button class="primary" id="next" disabled>Next →</button>
+    </div>
+  </section>
+
+  <section class="card" id="emailStep" hidden>
+    <p class="eyebrow">Almost there</p>
+    <h2>Your personalized startup plan is next.</h2>
     <p class="muted">
-      Discover where you stand, what you might be
-      missing, and what to focus on next.
+      Enter your details to generate your results.
+    </p>
+    <form id="detailsForm">
+      <label for="name">First name</label>
+      <input id="name" type="text" maxlength="80"
+             autocomplete="given-name" required>
+
+      <label for="email">Email address</label>
+      <input id="email" type="email" maxlength="254"
+             autocomplete="email" required>
+
+      <label class="consent">
+        <input type="checkbox" id="consent">
+        <span>
+          I'd also like to receive coffee business tips,
+          educational resources and occasional offers
+          by email. I can unsubscribe anytime.
+        </span>
+      </label>
+
+      <p class="notice">
+        Testing mode: Your contact details are not
+        currently saved or sent to ActiveCampaign.
+      </p>
+
+      <p id="formError" class="error" role="alert"></p>
+
+      <div class="actions">
+        <button class="secondary" type="button"
+                id="editAnswers">Back</button>
+        <button class="primary" type="submit"
+                id="generate">
+          Generate My Action Plan →
+        </button>
+      </div>
+    </form>
+  </section>
+
+  <section class="card" id="results" hidden>
+    <p class="eyebrow">Your Startup Readiness</p>
+    <h2 id="greeting"></h2>
+    <div class="score" id="score"></div>
+    <h2 id="stage"></h2>
+    <p class="muted">
+      Your score reflects how complete your planning
+      is, not your probability of business success.
     </p>
 
-    <div id="assessment">
-      <p id="counter"></p>
-      <div class="progress"><div id="bar"></div></div>
-      <h2 id="question"></h2>
-      <div id="options"></div>
-      <div class="buttons">
-        <button id="back" class="secondary">Back</button>
-        <button id="next" disabled>Next</button>
-      </div>
-    </div>
+    <h2>Your Top 3 Planning Priorities</h2>
+    <div id="priorities"></div>
 
-    <div id="results" hidden>
-      <p class="eyebrow">YOUR READINESS SNAPSHOT</p>
-      <div class="score" id="score"></div>
-      <h2 id="stage"></h2>
-      <p class="muted">
-        Your score reflects how developed your
-        startup planning is. It does not predict
-        whether your business will succeed.
-      </p>
-      <h2>Your Top 3 Planning Priorities</h2>
-      <div id="priorities"></div>
-      <button id="restart" class="secondary">
+    <h2>Your Personalized Action Plan</h2>
+    <div class="report" id="report"
+         aria-live="polite"></div>
+
+    <div class="actions">
+      <button class="secondary" id="restart">
         Start Again
       </button>
     </div>
-  </div>
+  </section>
 </main>
 
 <script>
 const questions = [
   {
     topic: "Startup stage",
-    question: "Where are you in your coffee shop journey?",
-    options: [
+    q: "Where are you in your coffee shop journey?",
+    a: [
       "It's still a dream or early idea",
       "I'm researching and exploring options",
       "I'm developing a business plan",
@@ -156,8 +265,8 @@ const questions = [
   },
   {
     topic: "Concept and positioning",
-    question: "How clearly have you defined your coffee shop concept?",
-    options: [
+    q: "How clearly have you defined your coffee shop concept?",
+    a: [
       "I haven't decided what kind of shop I want",
       "I have a general idea",
       "I know my target customer and main offering",
@@ -166,8 +275,8 @@ const questions = [
   },
   {
     topic: "Market and location research",
-    question: "How much research have you done on your potential location and customers?",
-    options: [
+    q: "How much research have you done on your potential location and customers?",
+    a: [
       "None yet",
       "I've looked at some locations",
       "I've researched customers, competitors and local demand",
@@ -176,8 +285,8 @@ const questions = [
   },
   {
     topic: "Startup budget",
-    question: "How well do you understand your startup costs?",
-    options: [
+    q: "How well do you understand your startup costs?",
+    a: [
       "I have no idea what it will cost",
       "I have a rough estimate",
       "I've listed major costs and estimated a budget",
@@ -186,8 +295,8 @@ const questions = [
   },
   {
     topic: "Funding plan",
-    question: "How prepared are you financially to fund your coffee shop?",
-    options: [
+    q: "How prepared are you financially to fund your coffee shop?",
+    a: [
       "I haven't worked out how I'll fund it",
       "I have some savings or funding ideas",
       "I've identified likely funding sources and requirements",
@@ -196,8 +305,8 @@ const questions = [
   },
   {
     topic: "Menu and pricing",
-    question: "How developed is your menu and pricing strategy?",
-    options: [
+    q: "How developed is your menu and pricing strategy?",
+    a: [
       "I haven't planned my menu",
       "I know roughly what I'd like to serve",
       "I've drafted a menu and researched prices",
@@ -206,8 +315,8 @@ const questions = [
   },
   {
     topic: "Equipment and layout",
-    question: "How prepared are you for equipment, layout and workflow decisions?",
-    options: [
+    q: "How prepared are you for equipment, layout and workflow decisions?",
+    a: [
       "I haven't researched these yet",
       "I have an equipment wish list",
       "I've researched equipment, suppliers and layout",
@@ -216,8 +325,8 @@ const questions = [
   },
   {
     topic: "Operational experience",
-    question: "What experience or support do you have in coffee shop operations?",
-    options: [
+    q: "What experience or support do you have in coffee shop operations?",
+    a: [
       "Very little experience or support",
       "Some hospitality or coffee experience",
       "Relevant experience or access to experienced advisers",
@@ -226,8 +335,8 @@ const questions = [
   },
   {
     topic: "Staffing and systems",
-    question: "How prepared are you for staffing and day-to-day systems?",
-    options: [
+    q: "How prepared are you for staffing and day-to-day systems?",
+    a: [
       "I haven't considered this yet",
       "I have a general idea of staffing needs",
       "I've outlined roles, training and basic procedures",
@@ -236,8 +345,8 @@ const questions = [
   },
   {
     topic: "Marketing",
-    question: "What's your plan for attracting and retaining customers?",
-    options: [
+    q: "What's your plan for attracting and retaining customers?",
+    a: [
       "I haven't thought about marketing yet",
       "I have a few promotional ideas",
       "I've identified channels and a launch approach",
@@ -247,32 +356,37 @@ const questions = [
 ];
 
 let current = 0;
-let answers = Array(questions.length).fill(null);
+let answers = Array(10).fill(null);
 
 const $ = id => document.getElementById(id);
 
 function render() {
-  const q = questions[current];
+  const item = questions[current];
+
   $("counter").textContent =
-    `Question ${current + 1} of ${questions.length}`;
+    `QUESTION ${current + 1} OF 10`;
+
   $("bar").style.width =
     `${current / questions.length * 100}%`;
-  $("question").textContent = q.question;
 
+  $("question").textContent = item.q;
   $("options").replaceChildren();
 
-  q.options.forEach((option, index) => {
+  item.a.forEach((answer, index) => {
     const button = document.createElement("button");
     button.type = "button";
-    button.className =
-      "option" + (answers[current] === index ? " selected" : "");
-    button.textContent = option;
-    button.setAttribute("aria-pressed", answers[current] === index);
+    button.className = "option" +
+      (answers[current] === index ? " selected" : "");
+    button.textContent = answer;
+    button.setAttribute(
+      "aria-pressed",
+      String(answers[current] === index)
+    );
 
-    button.addEventListener("click", () => {
+    button.onclick = () => {
       answers[current] = index;
       render();
-    });
+    };
 
     $("options").appendChild(button);
   });
@@ -280,76 +394,103 @@ function render() {
   $("back").disabled = current === 0;
   $("next").disabled = answers[current] === null;
   $("next").textContent =
-    current === questions.length - 1
-      ? "See My Results"
-      : "Next";
+    current === 9 ? "Continue →" : "Next →";
 }
 
-function showResults() {
-  const total = answers.reduce((sum, value) => sum + value, 0);
-  const percent = Math.round(total / 30 * 100);
-
-  $("assessment").hidden = true;
-  $("results").hidden = false;
-  $("score").textContent = `${percent}%`;
-
-  $("stage").textContent =
-    percent < 35 ? "Early Planning Stage" :
-    percent < 70 ? "Building Your Foundation" :
-    "Advanced Planning Stage";
-
-  const priorities = questions
-    .map((q, i) => ({
-      topic: q.topic,
-      score: answers[i],
-      order: i
-    }))
-    .sort((a, b) => a.score - b.score || a.order - b.order)
-    .slice(0, 3);
-
-  $("priorities").replaceChildren();
-
-  priorities.forEach((item, index) => {
-    const div = document.createElement("div");
-    div.className = "gap";
-
-    const heading = document.createElement("strong");
-    heading.textContent = `${index + 1}. ${item.topic}`;
-
-    const description = document.createElement("p");
-    description.textContent =
-      ["Not yet developed", "Early planning",
-       "Good progress", "Well developed"][item.score];
-
-    div.append(heading, description);
-    $("priorities").appendChild(div);
-  });
-}
-
-$("next").addEventListener("click", () => {
+$("next").onclick = () => {
   if (answers[current] === null) return;
-  if (current < questions.length - 1) {
+
+  if (current < 9) {
     current++;
     render();
   } else {
-    showResults();
+    $("assessment").hidden = true;
+    $("emailStep").hidden = false;
   }
-});
+};
 
-$("back").addEventListener("click", () => {
+$("back").onclick = () => {
   if (current > 0) {
     current--;
     render();
   }
-});
+};
 
-$("restart").addEventListener("click", () => {
+$("editAnswers").onclick = () => {
+  $("emailStep").hidden = true;
+  $("assessment").hidden = false;
+};
+
+$("detailsForm").onsubmit = async event => {
+  event.preventDefault();
+
+  const name = $("name").value.trim();
+  const email = $("email").value.trim();
+
+  if (!name || !email) return;
+
+  $("formError").textContent = "";
+  $("generate").disabled = true;
+  $("generate").textContent = "Generating your plan...";
+
+  try {
+    const response = await fetch("/api/analyze", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ answers })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(
+        data.error || "Unable to generate report"
+      );
+    }
+
+    $("greeting").textContent =
+      `${name}, here's where you stand.`;
+    $("score").textContent = `${data.score}%`;
+    $("stage").textContent = data.stage;
+
+    $("priorities").replaceChildren();
+
+    data.priorities.forEach((topic, index) => {
+      const div = document.createElement("div");
+      div.className = "priority";
+      div.textContent = `${index + 1}. ${
+        questions.find(q => q.q === topic)?.topic || topic
+      }`;
+      $("priorities").appendChild(div);
+    });
+
+    $("report").textContent = data.report;
+
+    $("emailStep").hidden = true;
+    $("results").hidden = false;
+
+    // Email and consent are not transmitted or saved.
+    // ActiveCampaign integration will be added later.
+
+  } catch (error) {
+    $("formError").textContent = error.message;
+  } finally {
+    $("generate").disabled = false;
+    $("generate").textContent =
+      "Generate My Action Plan →";
+  }
+};
+
+$("restart").onclick = () => {
   current = 0;
-  answers = Array(questions.length).fill(null);
+  answers = Array(10).fill(null);
+  $("detailsForm").reset();
   $("results").hidden = true;
   $("assessment").hidden = false;
   render();
-});
+};
 
 render();
 </script>
