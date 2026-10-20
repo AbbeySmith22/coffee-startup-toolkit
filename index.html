@@ -468,6 +468,84 @@ $("detailsForm").onsubmit = async event => {
 
     $("report").textContent = data.report;
 
+    // Display personalized product recommendations
+    const oldOffers = document.getElementById("personalizedOffers");
+    if (oldOffers) oldOffers.remove();
+
+    if (data.recommendations) {
+      const { product, membership, reason } = data.recommendations;
+
+      const offers = document.createElement("section");
+      offers.id = "personalizedOffers";
+      offers.style.cssText =
+        "margin-top:32px;display:grid;gap:18px;";
+
+      const productCard = document.createElement("div");
+      productCard.style.cssText =
+        "background:#FAF7F4;border:1px solid #E8DCD0;" +
+        "border-radius:16px;padding:24px;";
+
+      const membershipCard = document.createElement("div");
+      membershipCard.style.cssText =
+        "background:#252120;color:#FAF7F4;" +
+        "border-radius:16px;padding:24px;";
+
+      function addText(parent, tag, content, styles) {
+        const element = document.createElement(tag);
+        element.textContent = content;
+        element.style.cssText = styles;
+        parent.appendChild(element);
+        return element;
+      }
+
+      addText(
+        productCard, "p", "RECOMMENDED FOR YOU",
+        "font-size:12px;font-weight:700;letter-spacing:1.5px;color:#746D67;"
+      );
+
+      addText(
+        productCard, "h3", product.title,
+        "font-size:24px;color:#252120;margin:12px 0;"
+      );
+
+      addText(
+        productCard, "p", reason,
+        "font-size:15px;color:#746D67;line-height:1.6;"
+      );
+
+      addText(
+        productCard, "p", product.description,
+        "font-size:15px;color:#252120;line-height:1.6;"
+      );
+
+      addText(
+        membershipCard, "p", "WANT MORE SUPPORT?",
+        "font-size:12px;font-weight:700;letter-spacing:1.5px;color:#F8B144;"
+      );
+
+      addText(
+        membershipCard, "h3", membership.title,
+        "font-size:24px;color:#FAF7F4;margin:12px 0;"
+      );
+
+      addText(
+        membershipCard, "p", `$${membership.price}/month`,
+        "font-size:22px;font-weight:700;color:#F8B144;"
+      );
+
+      addText(
+        membershipCard, "p",
+        "Get ongoing guidance, practical resources and support " +
+        "from the Coffee Business Collective.",
+        "font-size:15px;line-height:1.6;color:#FAF7F4;"
+      );
+
+      offers.appendChild(productCard);
+      offers.appendChild(membershipCard);
+
+      $("report").insertAdjacentElement("afterend", offers);
+    }
+
     $("emailStep").hidden = true;
     $("results").hidden = false;
 
