@@ -129,6 +129,22 @@ Three specific, practical actions in priority order.
 YOUR NEXT MOVE
 A short closing recommendation.
 
+PERSONALIZED RESOURCE GUIDANCE
+After YOUR NEXT MOVE, add a short section called
+WHY THIS NEXT STEP MATTERS.
+
+Use the customer's actual assessment answers to:
+- Identify one specific planning gap.
+- Explain why it matters for their coffee business.
+- Give one practical action they can take next.
+- Write in a direct, experienced, conversational tone.
+- Be specific without making assumptions about their business.
+- Avoid generic encouragement or sales language.
+
+Do not recommend or name any paid products in this section.
+The application will select the appropriate product separately.
+Keep this section to 60-90 words.
+
 Keep the report useful, approachable and concise.
 Do not use Markdown tables.
 `;
