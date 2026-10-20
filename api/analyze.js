@@ -374,6 +374,9 @@ Prioritize specific, achievable next steps.
     }
 
  
+
+await contactSync;
+
 return res.status(200).json({
   score,
   stage,
@@ -381,6 +384,7 @@ return res.status(200).json({
   report,
   recommendations
 });
+
 
 
   } catch (error) {
