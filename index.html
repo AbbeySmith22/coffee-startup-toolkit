@@ -5,7 +5,49 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Coffee Shop Startup Readiness | Coffee Business</title>
-<style>
+
+@media print {
+  @page {
+    size: A4;
+    margin: 18mm;
+  }
+
+  body {
+    background: white !important;
+    color: #252120 !important;
+  }
+
+  #assessment,
+  #emailStep,
+  .actions,
+  #restart,
+  #savePdf {
+    display: none !important;
+  }
+
+  #results {
+    display: block !important;
+  }
+
+  #personalizedOffers {
+    margin-top: 24px !important;
+  }
+
+  #personalizedOffers > div {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  button {
+    display: none !important;
+  }
+
+  * {
+    box-shadow: none !important;
+  }
+}
+
+  <style>
 :root {
   --cream: #faf7f4;
   --dark: #252120;
