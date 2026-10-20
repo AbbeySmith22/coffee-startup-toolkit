@@ -241,15 +241,7 @@ input[type=text], input[type=email] {
       <input id="email" type="email" maxlength="254"
              autocomplete="email" required>
 
-      <label class="consent">
-        <input type="checkbox" id="consent">
-        <span>
-          I'd also like to receive coffee business tips,
-          educational resources and occasional offers
-          by email. I can unsubscribe anytime.
-        </span>
-      </label>
-
+  
       <p class="notice">
         Testing mode: Your contact details are not
         currently saved or sent to ActiveCampaign.
@@ -514,8 +506,7 @@ body: JSON.stringify({
   answers,
   name,
   email,
-  marketingConsent: $("consent").checked
-})
+marketingConsent: false})
     });
 
     const data = await response.json();
