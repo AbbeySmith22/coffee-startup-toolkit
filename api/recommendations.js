@@ -32,23 +32,25 @@ const PRODUCTS = {
   }
 };
 
+
 const MEMBERSHIPS = {
   startup: {
     title: "Start-Up Collective",
     price: 49,
-    url: ""
+    url: "https://coffeebusinesscollective.lovable.app/"
   },
   growth: {
     title: "Growth Collective",
     price: 199,
-    url: ""
+    url: "https://coffeebusinesscollective.lovable.app/"
   },
   advisory: {
     title: "Advisory Collective",
     price: 499,
-    url: ""
+    url: "https://coffeebusinesscollective.lovable.app/"
   }
 };
+
 
 function getRecommendations(answers) {
   if (
