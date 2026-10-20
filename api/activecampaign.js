@@ -122,6 +122,37 @@ async function saveAssessmentContact({
     await addTag(contactId, assessmentTagId);
   }
 
+  // Remove outdated readiness-stage tags.
+  // Keep all unrelated tags untouched.
+  const allStageTagIds = await Promise.all(
+    Object.values(STAGE_TAGS).map(getTagId)
+  );
+
+  const outdatedTagIds = allStageTagIds
+    .map(String)
+    .filter(id =>
+      id !== String(stageTagId) &&
+      assignedTagIds.has(id)
+    );
+
+  for (const outdatedTagId of outdatedTagIds) {
+    const currentTags = await acRequest(
+      `/contacts/${contactId}/contactTags?limit=100`
+    );
+
+    const association = (currentTags.contactTags || [])
+      .find(item =>
+        String(item.tag) === outdatedTagId
+      );
+
+    if (association) {
+      await acRequest(
+        `/contactTags/${association.id}`,
+        { method: "DELETE" }
+      );
+    }
+  }
+
   if (!assignedTagIds.has(String(stageTagId))) {
     await addTag(contactId, stageTagId);
   }
