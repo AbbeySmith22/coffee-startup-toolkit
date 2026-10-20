@@ -220,7 +220,13 @@ module.exports = async function handler(req, res) {
   }
 
   try {
-    const { answers } = req.body || {};
+
+const {
+  answers,
+  name,
+  email,
+  marketingConsent = false
+} = req.body || {};
 
     if (
       !Array.isArray(answers) ||
