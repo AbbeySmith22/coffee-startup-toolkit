@@ -129,6 +129,10 @@ Keep the report useful, approachable and concise.
 Do not use Markdown tables.
 `;
 
+module.exports.config = {
+  maxDuration: 60
+};
+
 module.exports = async function handler(req, res) {
   res.setHeader("Cache-Control", "no-store");
 
