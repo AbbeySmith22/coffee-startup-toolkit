@@ -540,6 +540,39 @@ $("detailsForm").onsubmit = async event => {
         "font-size:15px;line-height:1.6;color:#FAF7F4;"
       );
 
+      // Add product button only when a link exists
+      if (product.url) {
+        const productButton = document.createElement("a");
+        productButton.href = product.url;
+        productButton.target = "_blank";
+        productButton.rel = "noopener noreferrer";
+        productButton.textContent =
+          product.title === "Strategy Call with Matt"
+            ? "Book a Strategy Call →"
+            : "Get This Resource →";
+        productButton.style.cssText =
+          "display:inline-block;background:#F8B144;" +
+          "color:#252120;padding:14px 22px;" +
+          "border-radius:8px;font-weight:700;" +
+          "text-decoration:none;margin-top:12px;";
+        productCard.appendChild(productButton);
+      }
+
+      // Add membership button
+      if (membership.url) {
+        const membershipButton = document.createElement("a");
+        membershipButton.href = membership.url;
+        membershipButton.target = "_blank";
+        membershipButton.rel = "noopener noreferrer";
+        membershipButton.textContent = "Explore Membership →";
+        membershipButton.style.cssText =
+          "display:inline-block;background:#F8B144;" +
+          "color:#252120;padding:14px 22px;" +
+          "border-radius:8px;font-weight:700;" +
+          "text-decoration:none;margin-top:12px;";
+        membershipCard.appendChild(membershipButton);
+      }
+
       offers.appendChild(productCard);
       offers.appendChild(membershipCard);
 
