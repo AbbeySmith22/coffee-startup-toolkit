@@ -1,4 +1,6 @@
 
+const MATT_KNOWLEDGE = require("./matt-knowledge");
+
 const QUESTIONS = [
   "Where are you in your coffee shop journey?",
   "How clearly have you defined your coffee shop concept?",
@@ -220,7 +222,29 @@ module.exports = async function handler(req, res) {
           body: JSON.stringify({
             model: "claude-sonnet-4-6",
             max_tokens: 1300,
-            system: SYSTEM_PROMPT,
+
+system: `${SYSTEM_PROMPT}
+
+REFERENCE KNOWLEDGE:
+${MATT_KNOWLEDGE}
+
+Use the reference knowledge when relevant to the
+customer's answers.
+
+Apply its practical principles and teaching approach
+without copying long passages from the source.
+
+Do not invent quotations, personal experiences,
+or specific statements attributed to Matt Milletto.
+
+Do not imply Matt personally reviewed the assessment.
+
+When the reference does not cover a topic,
+provide sensible general guidance without
+claiming it comes from Matt.
+
+Prioritize specific, achievable next steps.
+`,
             messages: [
               {
                 role: "user",
