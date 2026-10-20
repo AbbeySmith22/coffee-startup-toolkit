@@ -600,6 +600,10 @@ $("detailsForm").onsubmit = async event => {
   }
 };
 
+$("savePdf").onclick = () => {
+  window.print();
+};
+
 $("restart").onclick = () => {
   current = 0;
   answers = Array(10).fill(null);
