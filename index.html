@@ -4,68 +4,354 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Coffee Shop Startup Toolkit</title>
+  <title>Coffee Shop Startup Readiness Assessment</title>
   <style>
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       background: #f7f4ef;
-      color: #29231f;
+      color: #302720;
       font-family: Arial, sans-serif;
     }
     main {
-      max-width: 680px;
-      margin: 70px auto;
-      padding: 24px;
+      max-width: 720px;
+      margin: 45px auto;
+      padding: 20px;
     }
     .card {
       background: white;
+      padding: 35px;
       border-radius: 16px;
-      padding: 32px;
-      box-shadow: 0 6px 24px #0000000a;
+      box-shadow: 0 8px 30px #0000000a;
     }
     .eyebrow {
-      color: #927354;
+      color: #8d6748;
       font-size: 12px;
-      letter-spacing: 2px;
       font-weight: bold;
+      letter-spacing: 2px;
     }
-    h1 { font-size: 36px; line-height: 1.15; }
-    p { line-height: 1.7; }
+    h1 { font-size: 32px; line-height: 1.2; }
+    h2 { font-size: 24px; }
+    p { line-height: 1.6; }
+    .muted { color: #776d65; }
+    .progress {
+      background: #eae5df;
+      height: 7px;
+      border-radius: 20px;
+      margin: 20px 0 30px;
+      overflow: hidden;
+    }
+    #bar {
+      height: 100%;
+      width: 0;
+      background: #8d6748;
+      transition: width .2s;
+    }
+    .option {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 16px;
+      margin: 10px 0;
+      background: white;
+      border: 1px solid #ddd4cb;
+      border-radius: 9px;
+      cursor: pointer;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+    .option:hover, .selected {
+      border-color: #8d6748;
+      background: #f5eee6;
+    }
     button {
+      padding: 14px 24px;
+      border: 0;
+      border-radius: 8px;
       background: #34271e;
       color: white;
-      border: none;
-      border-radius: 8px;
-      padding: 16px 24px;
-      font-size: 16px;
       cursor: pointer;
+      font-size: 15px;
     }
-    button:hover { background: #654831; }
-    @media (max-width: 600px) {
-      main { margin: 24px auto; }
+    button:disabled { opacity: .4; cursor: not-allowed; }
+    .secondary {
+      background: #eee8e2;
+      color: #302720;
+    }
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 25px;
+      gap: 12px;
+    }
+    .score {
+      font-size: 64px;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    .gap {
+      padding: 14px;
+      margin: 10px 0;
+      background: #f7f4ef;
+      border-radius: 8px;
+    }
+    [hidden] { display: none !important; }
+    @media(max-width:600px) {
+      main { margin: 10px auto; }
       .card { padding: 24px; }
-      h1 { font-size: 30px; }
+      h1 { font-size: 27px; }
     }
   </style>
 </head>
 <body>
-  <main>
-    <div class="card">
-      <p class="eyebrow">COFFEE BUSINESS TOOLKIT</p>
-      <h1>Are You Ready to Open Your Coffee Shop?</h1>
-      <p>
-        Discover how prepared you are, identify gaps
-        in your planning, and find out what to focus
-        on before making your next big investment.
+<main>
+  <div class="card">
+    <p class="eyebrow">COFFEE BUSINESS TOOLKIT</p>
+    <h1>Are You Ready to Open Your Coffee Shop?</h1>
+    <p class="muted">
+      Discover where you stand, what you might be
+      missing, and what to focus on next.
+    </p>
+
+    <div id="assessment">
+      <p id="counter"></p>
+      <div class="progress"><div id="bar"></div></div>
+      <h2 id="question"></h2>
+      <div id="options"></div>
+      <div class="buttons">
+        <button id="back" class="secondary">Back</button>
+        <button id="next" disabled>Next</button>
+      </div>
+    </div>
+
+    <div id="results" hidden>
+      <p class="eyebrow">YOUR READINESS SNAPSHOT</p>
+      <div class="score" id="score"></div>
+      <h2 id="stage"></h2>
+      <p class="muted">
+        Your score reflects how developed your
+        startup planning is. It does not predict
+        whether your business will succeed.
       </p>
-      <p>
-        Built around the practical coffee business
-        experience of Bellissimo Coffee Advisors.
-      </p>
-      <button type="button" disabled>
-        Assessment Coming Soon
+      <h2>Your Top 3 Planning Priorities</h2>
+      <div id="priorities"></div>
+      <button id="restart" class="secondary">
+        Start Again
       </button>
     </div>
-  </main>
+  </div>
+</main>
+
+<script>
+const questions = [
+  {
+    topic: "Startup stage",
+    question: "Where are you in your coffee shop journey?",
+    options: [
+      "It's still a dream or early idea",
+      "I'm researching and exploring options",
+      "I'm developing a business plan",
+      "I'm actively preparing to open"
+    ]
+  },
+  {
+    topic: "Concept and positioning",
+    question: "How clearly have you defined your coffee shop concept?",
+    options: [
+      "I haven't decided what kind of shop I want",
+      "I have a general idea",
+      "I know my target customer and main offering",
+      "I have a clear concept, customer profile and competitive positioning"
+    ]
+  },
+  {
+    topic: "Market and location research",
+    question: "How much research have you done on your potential location and customers?",
+    options: [
+      "None yet",
+      "I've looked at some locations",
+      "I've researched customers, competitors and local demand",
+      "I've assessed specific locations, foot traffic, competition and customer demand"
+    ]
+  },
+  {
+    topic: "Startup budget",
+    question: "How well do you understand your startup costs?",
+    options: [
+      "I have no idea what it will cost",
+      "I have a rough estimate",
+      "I've listed major costs and estimated a budget",
+      "I have a detailed budget including contingency and working capital"
+    ]
+  },
+  {
+    topic: "Funding plan",
+    question: "How prepared are you financially to fund your coffee shop?",
+    options: [
+      "I haven't worked out how I'll fund it",
+      "I have some savings or funding ideas",
+      "I've identified likely funding sources and requirements",
+      "I have a realistic funding plan, including reserves"
+    ]
+  },
+  {
+    topic: "Menu and pricing",
+    question: "How developed is your menu and pricing strategy?",
+    options: [
+      "I haven't planned my menu",
+      "I know roughly what I'd like to serve",
+      "I've drafted a menu and researched prices",
+      "I've calculated recipe costs, margins and a focused menu strategy"
+    ]
+  },
+  {
+    topic: "Equipment and layout",
+    question: "How prepared are you for equipment, layout and workflow decisions?",
+    options: [
+      "I haven't researched these yet",
+      "I have an equipment wish list",
+      "I've researched equipment, suppliers and layout",
+      "I've developed an equipment budget and operational layout plan"
+    ]
+  },
+  {
+    topic: "Operational experience",
+    question: "What experience or support do you have in coffee shop operations?",
+    options: [
+      "Very little experience or support",
+      "Some hospitality or coffee experience",
+      "Relevant experience or access to experienced advisers",
+      "A strong operational understanding and a clear support or management plan"
+    ]
+  },
+  {
+    topic: "Staffing and systems",
+    question: "How prepared are you for staffing and day-to-day systems?",
+    options: [
+      "I haven't considered this yet",
+      "I have a general idea of staffing needs",
+      "I've outlined roles, training and basic procedures",
+      "I have staffing budgets, training plans and operational systems mapped out"
+    ]
+  },
+  {
+    topic: "Marketing",
+    question: "What's your plan for attracting and retaining customers?",
+    options: [
+      "I haven't thought about marketing yet",
+      "I have a few promotional ideas",
+      "I've identified channels and a launch approach",
+      "I have a defined marketing plan, budget and customer retention strategy"
+    ]
+  }
+];
+
+let current = 0;
+let answers = Array(questions.length).fill(null);
+
+const $ = id => document.getElementById(id);
+
+function render() {
+  const q = questions[current];
+  $("counter").textContent =
+    `Question ${current + 1} of ${questions.length}`;
+  $("bar").style.width =
+    `${current / questions.length * 100}%`;
+  $("question").textContent = q.question;
+
+  $("options").replaceChildren();
+
+  q.options.forEach((option, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className =
+      "option" + (answers[current] === index ? " selected" : "");
+    button.textContent = option;
+    button.setAttribute("aria-pressed", answers[current] === index);
+
+    button.addEventListener("click", () => {
+      answers[current] = index;
+      render();
+    });
+
+    $("options").appendChild(button);
+  });
+
+  $("back").disabled = current === 0;
+  $("next").disabled = answers[current] === null;
+  $("next").textContent =
+    current === questions.length - 1
+      ? "See My Results"
+      : "Next";
+}
+
+function showResults() {
+  const total = answers.reduce((sum, value) => sum + value, 0);
+  const percent = Math.round(total / 30 * 100);
+
+  $("assessment").hidden = true;
+  $("results").hidden = false;
+  $("score").textContent = `${percent}%`;
+
+  $("stage").textContent =
+    percent < 35 ? "Early Planning Stage" :
+    percent < 70 ? "Building Your Foundation" :
+    "Advanced Planning Stage";
+
+  const priorities = questions
+    .map((q, i) => ({
+      topic: q.topic,
+      score: answers[i],
+      order: i
+    }))
+    .sort((a, b) => a.score - b.score || a.order - b.order)
+    .slice(0, 3);
+
+  $("priorities").replaceChildren();
+
+  priorities.forEach((item, index) => {
+    const div = document.createElement("div");
+    div.className = "gap";
+
+    const heading = document.createElement("strong");
+    heading.textContent = `${index + 1}. ${item.topic}`;
+
+    const description = document.createElement("p");
+    description.textContent =
+      ["Not yet developed", "Early planning",
+       "Good progress", "Well developed"][item.score];
+
+    div.append(heading, description);
+    $("priorities").appendChild(div);
+  });
+}
+
+$("next").addEventListener("click", () => {
+  if (answers[current] === null) return;
+  if (current < questions.length - 1) {
+    current++;
+    render();
+  } else {
+    showResults();
+  }
+});
+
+$("back").addEventListener("click", () => {
+  if (current > 0) {
+    current--;
+    render();
+  }
+});
+
+$("restart").addEventListener("click", () => {
+  current = 0;
+  answers = Array(questions.length).fill(null);
+  $("results").hidden = true;
+  $("assessment").hidden = false;
+  render();
+});
+
+render();
+</script>
 </body>
 </html>
