@@ -1,6 +1,8 @@
 
 const MATT_KNOWLEDGE = require("./matt-knowledge");
 
+const { getRecommendations } = require("./recommendations");
+
 const QUESTIONS = [
   "Where are you in your coffee shop journey?",
   "How clearly have you defined your coffee shop concept?",
@@ -193,6 +195,8 @@ module.exports = async function handler(req, res) {
       answer: ANSWER_OPTIONS[index][value]
     }));
 
+const recommendations = getRecommendations(answers);
+
     const userMessage = JSON.stringify({
       planningScore: score,
       planningStage: stage,
@@ -281,12 +285,15 @@ Prioritize specific, achievable next steps.
       });
     }
 
-    return res.status(200).json({
-      score,
-      stage,
-      priorities: priorities.map(p => p.topic),
-      report
-    });
+ 
+return res.status(200).json({
+  score,
+  stage,
+  priorities: priorities.map(p => p.topic),
+  report,
+  recommendations
+});
+
 
   } catch (error) {
     console.error("Assessment error:", error.message);
