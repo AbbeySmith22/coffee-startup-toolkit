@@ -28,7 +28,7 @@ const PRODUCTS = {
   strategyCall: {
     title: "Strategy Call with Matt",
     description: "Get personalized guidance on your most important business decisions.",
-    url: ""
+    url: "https://coffeebusinesscollective.lovable.app/strategy-call"
   }
 };
 
