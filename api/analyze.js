@@ -148,30 +148,6 @@ Keep this section to 60-90 words.
 Keep the report useful, approachable and concise.
 Do not use Markdown tables.
 
-IMPORTANT — REPORT LENGTH AND QUALITY
-
-Keep the entire assessment report between 200 and 250 words.
-
-Preserve the practical principles and teaching
-approach from the Bellissimo reference knowledge.
-
-Prioritize specific, useful advice over lengthy explanations.
-
-Do not repeat the same planning gap across sections.
-Each section must add something new.
-
-Use the customer's actual answers to make the advice
-specific to their stage of planning.
-
-Give clear actions rather than generic suggestions.
-
-Keep explanations concise without losing important
-financial or operational considerations.
-
-The separate product recommendation cards will
-provide additional resources and support options.
-Do not repeat those recommendations in the report.
-
 `;
 
 module.exports.config = {
