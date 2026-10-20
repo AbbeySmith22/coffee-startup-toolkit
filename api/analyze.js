@@ -268,7 +268,23 @@ const {
     }));
 
 const recommendations = getRecommendations(answers);
-
+// Save assessment details to ActiveCampaign.
+// A CRM error must never stop the customer's AI report.
+const contactSync = (
+  typeof email === "string" &&
+  /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim()) &&
+  typeof name === "string" &&
+  name.trim().length > 0
+)
+  ? saveAssessmentContact({
+      name: name.trim(),
+      email: email.trim(),
+      stage,
+      marketingConsent: marketingConsent === true
+    }).catch(error => {
+      console.error("ActiveCampaign sync failed:", error.message);
+    })
+  : Promise.resolve();
     const userMessage = JSON.stringify({
       planningScore: score,
       planningStage: stage,
