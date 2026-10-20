@@ -509,7 +509,13 @@ waitingMessage.hidden = false;
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ answers })
+
+body: JSON.stringify({
+  answers,
+  name,
+  email,
+  marketingConsent: $("consent").checked
+})
     });
 
     const data = await response.json();
